@@ -62,4 +62,7 @@ ThoughtSchema.virtual("reactionCount").get(function () {
   return this.reactions.length;
 });
 
+const Thought = model("Thought", ThoughtSchema);
+
+module.exports = Thought;
 // Array of nested documents created with the reactionSchema
