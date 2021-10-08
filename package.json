@@ -20,5 +20,6 @@
     "express": "^4.17.1",
     "mongod": "^2.0.0",
     "mongoose": "^6.0.9"
-  }
+  },
+  "devDependencies": {}
 }
