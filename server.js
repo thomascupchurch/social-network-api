@@ -9,9 +9,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use(require("./routes"));
+// app.use("/", routes);
+// app.use(app.router);
+// routes.initialize(app);
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/pizza-hunt", {
-  useFindAndModify: false,
+  useFindAndModify: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
