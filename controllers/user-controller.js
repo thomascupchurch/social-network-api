@@ -1,4 +1,5 @@
-const { User, Thought } = require("../models");
+const User = require("../models/User");
+const Thought = require("../models/Thought");
 
 const userController = {
   // get all users
@@ -42,8 +43,23 @@ const userController = {
       });
   },
 
+  createUser({ params, body }, res) {
+    User.create(body)
+   
+      .then((dbUserData) => {
+        if (!dbUserData) {
+          res.status(404).json({ message: "cannot create user." });
+          return;
+        }
+        res.json(dbUserData);
+      })
+      .catch((err) => res.json(err));
+    
+    }
+  }
   // update user by id
-};
+
+module.exports = userController;
 
 // /api/users
 
