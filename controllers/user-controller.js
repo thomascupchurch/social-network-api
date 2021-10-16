@@ -69,13 +69,16 @@ const userController = {
     .catch((err) => res.json(err));
   },
 
-  deleteUser({ params, body }, res) {
-    User.findOneAndDelete(body)
+  deleteUser({ params }, res) {
+    User.findOneAndDelete({ _id: params.id })
     .then((dbUserData) => {
       if(!dbUserData) {
-        res.status(404).json
+        res.status(404).json({ message: "cannot find a user with this id."});
+        return;
       }
+      res.json(dbUserData);
     })
+    .catch((err))
   }
   }
   // update user by id
