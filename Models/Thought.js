@@ -54,10 +54,11 @@ const ThoughtSchema = new Schema(
       required: true,
     },
     reactions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Reaction"
-      },
+      ReactionSchema
+      // {
+      //   type: Schema.Types.ObjectId,
+      //   ref: "Reaction"
+      // },
     ],
   },
   {
@@ -70,10 +71,11 @@ const ThoughtSchema = new Schema(
 );
 
 ThoughtSchema.virtual("reactionCount").get(function () {
-  return this.reactions.reduce(
-    (total, reaction) => total + thought.reactions.length + 1,
-    0
-  )
+  return this.reactions.length;
+  // return this.reactions.reduce(
+  //   (total, reaction) => total + thought.reactions.length + 1,
+  //   0
+  // )
 });
 
 const Thought = model("Thought", ThoughtSchema);
