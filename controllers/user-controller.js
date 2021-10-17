@@ -76,6 +76,36 @@ const userController = {
       res.json(dbUserData);
     })
     .catch((err))
+  },
+
+  addFriend({ params }, res) {
+    // Friend.create(params)
+    // .then(({ _id }) => 
+    User.findOneAndUpdate(
+      { _id: params.userId },
+      { $addToSet: { friends: params.friendId } },
+      // { new: true, runValidators: true }
+    )
+    .then((dbUserData) => {
+      if(!dbUserData) {
+        res.status(404).json({ message: "cannot add friend" });
+        return;
+      }
+      res.json(dbUserData);
+    })
+    .catch((err) => res.json(err));
+  },
+
+  removeFriend({ params }, res) {
+    User.findOneAndUpdate({ _id: params.id })
+    .then((dbUserData) => {
+      if(!dbUserData) {
+        res.status(404).json({ message: "cannot delete friend" });
+        return;
+      }
+      res.json(dbUserData);
+    })
+    .catch((err))
   }
   }
   // update user by id
