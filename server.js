@@ -14,7 +14,7 @@ app.use(require("./routes/api"));
 // routes.initialize(app);
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/pizza-hunt", {
-  useFindAndModify: true,
+  useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
