@@ -21,17 +21,18 @@ const ReactionSchema = new Schema(
       type: Date,
       default: Date.now,
       get: (createdAtVal) => dateFormat(createdAtVal),
-    },
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true
     }
+    // user: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true
+    // }
   },
   {
     toJSON: {
       getters: true,
     },
+    id: false
   }
 );
 
@@ -76,7 +77,7 @@ ThoughtSchema.virtual("reactionCount").get(function () {
 });
 
 const Thought = model("Thought", ThoughtSchema);
-
+// const Reaction = model("Reaction", ReactionSchema);
 
 module.exports = Thought;
 // Array of nested documents created with the reactionSchema
