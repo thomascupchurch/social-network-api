@@ -1,5 +1,4 @@
-const User = require("../models/User");
-const Thought = require("../models/Thought");
+const { User, Thought } = require("../models");
 
 const userController = {
   // get all users
@@ -45,7 +44,6 @@ const userController = {
 
   createUser({ params, body }, res) {
     User.create(body)
-   
       .then((dbUserData) => {
         if (!dbUserData) {
           res.status(404).json({ message: "cannot create user." });
@@ -53,8 +51,7 @@ const userController = {
         }
         res.json(dbUserData);
       })
-      .catch((err) => res.json(err));
-    
+      .catch((err) => res.status(400).json(err));
     },
 
   updateUser({ params, body }, res) {
