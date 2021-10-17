@@ -70,13 +70,18 @@ const userController = {
     User.findOneAndDelete({ _id: params.id })
     .then((dbUserData) => {
       if(!dbUserData) {
-        res.status(404).json({ message: "cannot find a user with this id."});
+        res.status(404).json({ message: "cannot delete this user."});
         return;
       }
       res.json(dbUserData);
     })
-    .catch((err))
+    .catch((err) => res.json(err))
+    // .then(
+    //   mongoose.connection.collections['user.thoughts'].drop(function(err) {
+    //     console.log('collection dropped');
+    //   }))
   },
+     
 
   addFriend({ params }, res) {
     // Friend.create(params)
@@ -97,15 +102,20 @@ const userController = {
   },
 
   removeFriend({ params }, res) {
-    User.findOneAndUpdate({ _id: params.id })
+    User.findOneAndUpdate(
+      { _id: params.userId },
+      { $removeFromSet: { friends: params.friendId } },
+      // { new: true, runValidators: true }
+    )
     .then((dbUserData) => {
       if(!dbUserData) {
-        res.status(404).json({ message: "cannot delete friend" });
+        res.status(404).json({ message: "cannot remove friend" });
         return;
       }
       res.json(dbUserData);
     })
-    .catch((err))
+    .catch((err) => res.json(err));
+  
   }
   }
   // update user by id

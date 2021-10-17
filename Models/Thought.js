@@ -13,7 +13,7 @@ const ReactionSchema = new Schema(
       trim: true,
       maxlength: 280,
     },
-    userName: {
+    username: {
       type: String,
       required: true,
     },
@@ -49,7 +49,7 @@ const ThoughtSchema = new Schema(
       default: Date.now,
       get: (createdAtVal) => dateFormat(createdAtVal),
     },
-    userName: {
+    username: {
       type: String,
       required: true,
     },

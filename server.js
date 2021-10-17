@@ -13,7 +13,7 @@ app.use(require("./routes/api"));
 // app.use(app.router);
 // routes.initialize(app);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/pizza-hunt", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/social-network-api", {
   useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true,
