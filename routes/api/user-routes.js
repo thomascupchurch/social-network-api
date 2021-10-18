@@ -5,58 +5,17 @@ const {
   createUser,
   updateUser,
   deleteUser,
+  addFriend,
+  removeFriend,
 } = require("../../controllers/user-controller");
 
+// create a user and get all users
 router.route("/").get(getAllUser).post(createUser);
 
+// get a single user by id or update a user by id or delete user by id
 router.route("/:id").get(getUserById).put(updateUser).delete(deleteUser);
 
+// add or remove a friend associated with user
+router.route("/:userId/friends/:friendId").post(addFriend).delete(removeFriend);
+
 module.exports = router;
-// /api/users
-
-// GET all users
-
-// GET a single user by its _id and populated thought and friend data
-
-// POST a new user:
-
-// // example data
-// {
-//   "username": "lernantino",
-//   "email": "lernantino@gmail.com"
-// }
-// PUT to update a user by its _id
-
-// DELETE to remove user by its _id
-
-// BONUS: Remove a user's associated thoughts when deleted.
-
-// /api/users/:userId/friends/:friendId
-
-// POST to add a new friend to a user's friend list
-
-// DELETE to remove a friend from a user's friend list
-
-// /api/thoughts
-
-// GET to get all thoughts
-
-// GET to get a single thought by its _id
-
-// POST to create a new thought (don't forget to push the created thought's _id to the associated user's thoughts array field)
-
-// // example data
-// {
-//   "thoughtText": "Here's a cool thought...",
-//   "username": "lernantino",
-//   "userId": "5edff358a0fcb779aa7b118b"
-// }
-// PUT to update a thought by its _id
-
-// DELETE to remove a thought by its _id
-
-// /api/thoughts/:thoughtId/reactions
-
-// POST to create a reaction stored in a single thought's reactions array field
-
-// DELETE to pull and remove a reaction by the reaction's reactionId value

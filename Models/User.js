@@ -1,6 +1,6 @@
 const { Schema, model, Types } = require("mongoose");
-const Thought = require("./Thought");
-const dateFormat = require("../utils/dateFormat");
+// const Thought = require("./Thought");
+// const dateFormat = require("../utils/dateFormat");
 
 const UserSchema = new Schema(
   {
@@ -10,7 +10,7 @@ const UserSchema = new Schema(
       required: true,
       trim: true,
     },
-    
+
     email: {
       type: String,
       required: true,
@@ -23,11 +23,13 @@ const UserSchema = new Schema(
         },
       },
     },
-    thoughts: [{
-      type: Schema.Types.ObjectId,
-      ref: "Thought"
-    }],
-    
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Thought",
+      },
+    ],
+
     friends: [this],
   },
   {
@@ -35,7 +37,7 @@ const UserSchema = new Schema(
       virtuals: true,
       getters: true,
     },
-    id: false,
+    // id: false,
   }
 );
 

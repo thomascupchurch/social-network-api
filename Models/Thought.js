@@ -13,7 +13,7 @@ const ReactionSchema = new Schema(
       trim: true,
       maxlength: 280,
     },
-    userName: {
+    username: {
       type: String,
       required: true,
     },
@@ -21,17 +21,18 @@ const ReactionSchema = new Schema(
       type: Date,
       default: Date.now,
       get: (createdAtVal) => dateFormat(createdAtVal),
-    },
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true
     }
+    // user: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true
+    // }
   },
   {
     toJSON: {
       getters: true,
     },
+    id: false
   }
 );
 
@@ -48,15 +49,16 @@ const ThoughtSchema = new Schema(
       default: Date.now,
       get: (createdAtVal) => dateFormat(createdAtVal),
     },
-    userName: {
+    username: {
       type: String,
       required: true,
     },
     reactions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Reaction"
-      },
+      ReactionSchema
+      // {
+      //   type: Schema.Types.ObjectId,
+      //   ref: "Reaction"
+      // },
     ],
   },
   {
@@ -69,14 +71,15 @@ const ThoughtSchema = new Schema(
 );
 
 ThoughtSchema.virtual("reactionCount").get(function () {
-  return this.reactions.reduce(
-    (total, reaction) => total + thought.reactions.length + 1,
-    0
-  )
+  return this.reactions.length;
+  // return this.reactions.reduce(
+  //   (total, reaction) => total + thought.reactions.length + 1,
+  //   0
+  // )
 });
 
 const Thought = model("Thought", ThoughtSchema);
-
+// const Reaction = model("Reaction", ReactionSchema);
 
 module.exports = Thought;
 // Array of nested documents created with the reactionSchema
